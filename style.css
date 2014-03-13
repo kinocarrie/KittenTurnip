@@ -1,35 +1,128 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  line-height: 150%;
+  font-weight: 300;
+}
+
 .doors div {
-           padding: 40px;
-           margin: 10px;
-           width: 200px;
-           height: 300px;
-           float: left;
-           text-align: center;
-           background-color: orange;
-           overflow: hidden;
-           position: relative;
-       }
+ padding: 40px;
+ margin: 10px;
+ width: 150px;
+ height: 200px;
+ float: left;
+ text-align: center;
+ background-color: #9E0C39;
+ overflow: hidden;
+ position: relative;
+}
 
-       .doors img {
-        width: 280px;
-        height: auto;
-        position: absolute;
-        top: 0;
-        right: 0;
-       }
+.doors img {
+  width: 280px;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
-       .selectedDoor {
-        background-color: green!important;
-       }
+.selectedDoor {
+  background-color: green!important;
+}
 
-       .turnipone {
-        background-color: pink!important;
-       }
+.turnipone {
+  background-color: pink!important;
+}
 
-       #switchmessage {
-        clear: both;
-       }
+#switchmessage {
+  clear: both;
+}
 
-       .switchScore, .stickScore {
-        clear: both;
-       }
+.switchScore, .stickScore {
+  clear: both;
+}
+
+header {
+  height: 100%;
+  background-color: #E21B5A;
+  font-family: 'Titan One', cursive;
+  position: relative;
+  color: #FBFFE3;
+}
+
+.title {
+  position: absolute;
+  top: 42%;
+  text-align: center;
+  width: 100%;
+}
+
+h1 {
+  font-size: 6em;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  width: 95%;
+  text-shadow: -5px 5px 0 rgba(0,0,0,0.4);
+  line-height: 100%;
+  transform: rotate(-5deg);
+  /* Safari */
+  -webkit-transform: rotate(-5deg);
+  /* Firefox */
+  -moz-transform: rotate(-5deg);
+  /* IE */
+  -ms-transform: rotate(-5deg);
+  /* Opera */
+  -o-transform: rotate(-5deg);
+  margin: 0 auto;
+}
+
+h1 span {
+  text-transform: uppercase;
+  font-size: 40%;
+}
+
+h2 {
+  margin: -2% 0 0 30%;
+  font-weight: 300;
+  text-shadow: -2px 2px 0 rgba(0,0,0,0.4);
+  font-family: 'Roboto Slab', serif;
+}
+
+article {
+  padding: 80px 25%;
+  box-sizing: border-box;
+  moz-box-sizing: border-box;
+  min-height: 100%;
+}
+
+article h3 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 3em;
+  font-weight: 300;
+}
+
+.monty {
+  background-color: #333333;
+  color: #FBFFE3;
+}
+
+.monty h3 {
+  color: #FBFFE3;
+}
+
+.howto {
+  background-color: #83A300;
+  color: #FBFFE3;
+}
+
+.thegame {
+  background-color: #FBFFE3;
+  color: #333333;
+}
+
+
+

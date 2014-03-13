@@ -10,7 +10,7 @@
         var randomKitten = function() {
             if (kittenSelector <= 0.33333333) {
                 doorOne = "kitten";
-            } else if (kittenSelector >= 0.66666666) {
+            } else if (kittenSelector > 0.66666666) {
                 doorThree = "kitten";
             } else {
                 doorTwo = "kitten";
@@ -153,7 +153,7 @@
                     };
                     makeReadable();
                     var ssMessage = function() {
-                        $("body").append("<div id='switchmessage'>You selected " + doorSelected + ". There is a turnip behind " + turnipReveal + ". Would you like to STICK or SWITCH? <button id='stick'>STICK!</button> or <button id='switch'>SWITCH!</button></div>");
+                        $(".doors").after("<div id='switchmessage'>You selected " + doorSelected + ". There is a turnip behind " + turnipReveal + ". Would you like to STICK or SWITCH? <button id='stick'>STICK!</button> or <button id='switch'>SWITCH!</button></div>");
                     };
 
                     var highlightSelection = function(doorId) {
