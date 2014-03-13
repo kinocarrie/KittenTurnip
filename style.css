@@ -1,0 +1,35 @@
+.doors div {
+           padding: 40px;
+           margin: 10px;
+           width: 200px;
+           height: 300px;
+           float: left;
+           text-align: center;
+           background-color: orange;
+           overflow: hidden;
+           position: relative;
+       }
+
+       .doors img {
+        width: 280px;
+        height: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+       }
+
+       .selectedDoor {
+        background-color: green!important;
+       }
+
+       .turnipone {
+        background-color: pink!important;
+       }
+
+       #switchmessage {
+        clear: both;
+       }
+
+       .switchScore, .stickScore {
+        clear: both;
+       }
