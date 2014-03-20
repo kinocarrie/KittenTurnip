@@ -8,9 +8,9 @@
         var turnipSelector = Math.random();
 
         var randomKitten = function() {
-            if (kittenSelector <= 0.33333333) {
+            if (kittenSelector <= 0.33333333333) {
                 doorOne = "kitten";
-            } else if (kittenSelector > 0.66666666) {
+            } else if (kittenSelector > 0.66666666666) {
                 doorThree = "kitten";
             } else {
                 doorTwo = "kitten";
@@ -22,14 +22,23 @@
         var switchWon = 0;
         var switchLost = 0;
 
+        function timePlural(i) {
+            if (i == 1) {
+                return ("time")    
+                }
+            else {
+                return ("times")  
+            }
+        };
+
         var printSwitchScores = function() {
             var switchTotal = switchWon + switchLost;
             var switchWinPercent = switchWon / switchTotal * 100;
             if (switchTotal < 10) {
-                $(".switchScore").html("You have switched " + switchTotal + " times. You must switch in the game 10 times before you can see the score.");
+                $(".switchScore").html("You have switched " + switchTotal + " " + timePlural(switchTotal) + ". You must switch in the game 10 times before you can see the score.");
             }
             else {
-                $(".switchScore").html("You have switched " + switchTotal + " times. You won " + switchWon + " times.<br>You won " + Math.round(switchWinPercent) + "% of the time when you switched.");
+                $(".switchScore").html("You have switched " + switchTotal + " " + timePlural(switchTotal) + ". You won " + switchWon + " " + timePlural(switchWon) + ".<br>You won " + Math.round(switchWinPercent) + "% of the time when you switched.");
             }
         };
 
@@ -37,10 +46,10 @@
             var stickTotal = stickWon + stickLost;
             var stickWinPercent = stickWon / stickTotal * 100;
             if (stickTotal < 10) {
-                $(".stickScore").html("You have stuck " + stickTotal + " times. You must stick in the game 10 times before you can see the score.");
+                $(".stickScore").html("You have stuck " + stickTotal + " " + timePlural(stickTotal) + ". You must stick in the game 10 times before you can see the score.");
             }
             else {
-                $(".stickScore").html("You have stuck " + stickTotal + " times. You won " + stickWon + " times.<br>You won " + Math.round(stickWinPercent) + "% of the time when you stuck.");
+                $(".stickScore").html("You have stuck " + stickTotal + " " + timePlural(stickTotal) + ". You won " + stickWon + " " + timePlural(stickWon) + ".<br>You won " + Math.round(stickWinPercent) + "% of the time when you stuck.");
             }
         };
 
@@ -99,11 +108,11 @@
             var switchStick = function () {
                 $("#switch").click( function() {
                     if (foundTurnip == true) {
-                        alert("You made the right choice by switching! YOU FOUND THE KITTEN!");
+                        $("#instructionJS").html("You made the right choice by switching! YOU FOUND THE KITTEN! <br> Next Step: Click on a door to keep on playing!");
                         switchWon++;
                     }
                     else {
-                        alert("You should not have switched, you got stuck with the turnip!");
+                        $("#instructionJS").html("You should not have switched, you got stuck with the Turnip! <br> Next Step: Click on a door to keep on playing!");
                         switchLost++;
                     }
                     kittenDoor();
@@ -112,11 +121,11 @@
                 });
                 $("#stick").click( function() {
                     if (foundTurnip == true) {
-                        alert("You stuck to your guns, and guess what, you won the sodding turnip!");
+                        $("#instructionJS").html("You stuck to your guns and won a Turnip! <br> Next Step: Click on a door to keep on playing!");
                         stickLost++;
                     }
                     else {
-                        alert("Oh look, you had the kitten all along! Well done, now take him home and give him love.");
+                        $("#instructionJS").html("You had the kitten all along! You won the Kitten! <br> Next Step: Click on a door to keep on playing!");
                         stickWon++;
                     }
                     kittenDoor();
@@ -153,7 +162,8 @@
                     };
                     makeReadable();
                     var ssMessage = function() {
-                        $(".doors").after("<div id='switchmessage'>You selected " + doorSelected + ". There is a turnip behind " + turnipReveal + ". Would you like to STICK or SWITCH? <button id='stick'>STICK!</button> or <button id='switch'>SWITCH!</button></div>");
+                        $("#instructionJS").html("You selected " + doorSelected + ". There is a turnip behind " + turnipReveal + ". <br> Next Step: Would you like to STICK or SWITCH?");
+                        $('.doors').after("<div id='switchmessage'><button id='stick'>STICK!</button> or <button id='switch'>SWITCH!</button></div>")
                     };
 
                     var highlightSelection = function(doorId) {

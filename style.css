@@ -6,7 +6,8 @@ html, body {
 p {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   line-height: 150%;
-  font-weight: 300;
+  font-weight: 100;
+  font-size: 18px;
 }
 
 .doors div {
@@ -19,6 +20,9 @@ p {
  background-color: #9E0C39;
  overflow: hidden;
  position: relative;
+ font-family: 'Titan One', cursive;
+ color: #fff;
+ font-size: 4em;
 }
 
 .doors img {
@@ -50,7 +54,8 @@ header {
   background-color: #E21B5A;
   font-family: 'Titan One', cursive;
   position: relative;
-  color: #FBFFE3;
+  /*color: #FBFFE3;*/
+  color: #fff;
 }
 
 .title {
@@ -66,7 +71,7 @@ h1 {
   font-style: italic;
   text-align: center;
   width: 95%;
-  text-shadow: -5px 5px 0 rgba(0,0,0,0.4);
+  text-shadow: -7px 7px 0 rgba(0,0,0,0.4);
   line-height: 100%;
   transform: rotate(-5deg);
   /* Safari */
@@ -90,9 +95,10 @@ h2 {
   font-weight: 300;
   text-shadow: -2px 2px 0 rgba(0,0,0,0.4);
   font-family: 'Roboto Slab', serif;
+  letter-spacing: 1px;
 }
 
-article {
+article, footer {
   padding: 80px 25%;
   box-sizing: border-box;
   moz-box-sizing: border-box;
@@ -102,27 +108,37 @@ article {
 article h3 {
   font-family: 'Roboto Slab', serif;
   font-size: 3em;
-  font-weight: 300;
+  font-weight: 700;
 }
 
 .monty {
   background-color: #333333;
-  color: #FBFFE3;
+  color: #fff;
 }
 
 .monty h3 {
-  color: #FBFFE3;
+  color: #fff;
 }
 
 .howto {
   background-color: #83A300;
-  color: #FBFFE3;
+  color: #fff;
 }
 
 .thegame {
-  background-color: #FBFFE3;
+  background-color: #fff;
   color: #333333;
 }
 
+footer {
+  background-color: #E21B5A;
+}
 
+#instructionJS {
+  background-color: #E21B5A;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+}
 
