@@ -221,12 +221,10 @@ var switchWinPercent = switchScore / switchTotal * 100;
 $("#replay > button").click(function() {
      $("#buttons > button").on("click");
     appendScore();
-    $(".doors>div").fadeOut()
-    $(".doors").removeClass("selected");
+    $(".doors, #message").fadeOut(300).fadeIn(600);
     setTimeout(function() {
-        $(".doors").removeClass("kitten turnip");
-        $(".doors>div").show();
-    }, 800);
+        $(".doors").removeClass("kitten turnip selected");
+     }, 300);
     $("#replay").hide();
     $("#message").html("Pick another door to play again!");
     prizeReset();

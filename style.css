@@ -31,7 +31,9 @@ p {
   height: 100%;
   top: -300px;
   left: 0;
-  transition: top 1s;
+  background-color: red;
+  transition: background 1s;
+  
 }
 
 #message {
@@ -58,12 +60,14 @@ p {
 .kitten>div {
   background-image: url("http://placekitten.com/g/200/300");
   top: 0;
+  transition: top 1s;
 }
 
 .turnip>div {
   background-color: green;
   background-image: url("http://www.placecage.com/c/200/300");
   top: 0;
+transition: top 1s;
 }
 
 .selected {
