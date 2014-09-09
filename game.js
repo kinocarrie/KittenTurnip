@@ -203,12 +203,14 @@ function appendScore() {
     gameTotal++;
     var switchTotal = switchScore + switchLost;
     var stickTotal = stickScore + stickLost;
+    var stickWinPercent = stickScore / stickTotal * 100;
+var switchWinPercent = switchScore / switchTotal * 100;
     if (gameTotal < 10) {
         $("#score .warning").html("NO SCORE YET! You've only played " + gameTotal + " " + timePlural(gameTotal) + ". You must plat at least 10 games.");
     } 
     else {
-        $("#stickscore>div").html("Won " + stickScore + " out of " + stickTotal);
-        $("#switchscore>div").html("Won " + switchScore + " out of " + switchTotal);
+        $("#stickscore>div").html("Won " + stickScore + " out of " + stickTotal + "<br> That's " + Math.round(stickWinPercent) + "% of the time.");
+        $("#switchscore>div").html("Won " + switchScore + " out of " + switchTotal + "<br> That's " + Math.round(switchWinPercent) + "% of the time.");
     }
     if (gameTotal >= 10) {
         $("#score>div").show();
