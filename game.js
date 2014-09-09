@@ -1,28 +1,35 @@
- $(document).ready(function() {
+$(function() { 
 
-        var doorOne = "turnip";
-        var doorTwo = "turnip";
-        var doorThree = "turnip";
+$("#buttons").hide();
+$("#replay").hide();
+$("#score>div").hide();
 
-        var kittenSelector = Math.random();
-        var turnipSelector = Math.random();
+var doors = [{getID: "doorOne",
+    prize: "turnip",
+    turnipReveal: false,
+    readable: "Door One",
+    switchable: true
+    }, {getID: "doorTwo",
+    prize: "turnip",
+    turnipReveal: false,
+    readable: "Door Two",
+    switchable: true
+    }, {getID: "doorThree",
+    prize: "turnip",
+    turnipReveal: false,
+    readable: "Door Three",
+    switchable: true,
+}]
 
-        var randomKitten = function() {
-            if (kittenSelector <= 0.33333333333) {
-                doorOne = "kitten";
-            } else if (kittenSelector > 0.66666666666) {
-                doorThree = "kitten";
-            } else {
-                doorTwo = "kitten";
-            };
-        };
+var switchScore = 0;
+var switchLost = 0;
+var stickScore = 0;
+var stickLost = 0;
+var gameTotal = 0;
+var kittenSelector = Math.random();
+var turnipSelector = Math.random();
 
-        var stickWon = 0;
-        var stickLost = 0;
-        var switchWon = 0;
-        var switchLost = 0;
-
-        function timePlural(i) {
+function timePlural(i) {
             if (i == 1) {
                 return ("time")    
                 }
@@ -31,238 +38,198 @@
             }
         };
 
-        var printSwitchScores = function() {
-            var switchTotal = switchWon + switchLost;
-            var switchWinPercent = switchWon / switchTotal * 100;
-            if (switchTotal < 10) {
-                $(".switchScore").html("You have switched " + switchTotal + " " + timePlural(switchTotal) + ". You must switch in the game 10 times before you can see the score.");
-            }
-            else {
-                $(".switchScore").html("You have switched " + switchTotal + " " + timePlural(switchTotal) + ". You won " + switchWon + " " + timePlural(switchWon) + ".<br>You won " + Math.round(switchWinPercent) + "% of the time when you switched.");
-            }
-        };
+function accessDoors(a) {
+    for(var i=0; i<doors.length; i++) {
+        console.log(doors[i].readable + ": " + doors[i][a]);
+} //end for
+} //end accessDoors
 
-        var printStickScores = function() {
-            var stickTotal = stickWon + stickLost;
-            var stickWinPercent = stickWon / stickTotal * 100;
-            if (stickTotal < 10) {
-                $(".stickScore").html("You have stuck " + stickTotal + " " + timePlural(stickTotal) + ". You must stick in the game 10 times before you can see the score.");
-            }
-            else {
-                $(".stickScore").html("You have stuck " + stickTotal + " " + timePlural(stickTotal) + ". You won " + stickWon + " " + timePlural(stickWon) + ".<br>You won " + Math.round(stickWinPercent) + "% of the time when you stuck.");
-            }
-        };
+function prizeReset() {
+    for(var i=0; i<doors.length; i++) {
+        doors[i].prize = "turnip";
+        doors[i].turnipReveal = false;
+        doors[i].switchable = true;
+    }
+    kittenSelector = Math.random();
+    turnipSelector = Math.random();
+    }; //end prize reset
 
-        var loadGame = function() {
+function prizeSelector() {
 
-            var turnipReveal;
-            var foundTurnip;
+if (kittenSelector <= 0.33333333333333) {
+    doors[0].prize = "kitten";
+    if (turnipSelector <= 0.5) {
+        doors[1].turnipReveal = true;
+    }
+    else {
+        doors[2].turnipReveal = true;
+    }
+} //end if
+else if (kittenSelector <= 0.666666666666666) {
+    doors[1].prize = "kitten";
+    if (turnipSelector <= 0.5) {
+        doors[0].turnipReveal = true;
+    }
+    else {
+        doors[2].turnipReveal = true;
+    }
+} //end else if
+else {
+    doors[2].prize = "kitten";
+    if (turnipSelector <= 0.5) {
+        doors[0].turnipReveal = true;
+    }
+    else {
+        doors[1].turnipReveal = true;
+    }
+} // end else
+} //end prizeSelector
 
-            randomKitten();
+prizeSelector();
 
-            var removeMessage = function() {
-                $("#switchmessage").remove();
-            };
-
-            var reloadGame = function() {
-                removeMessage();
-                $(".doors>div").on("click", singleGame());
-                $(".doors img").delay( 1000 ).fadeOut( 800 )
-                setTimeout(function(){
-                $(".doors img").remove();
-                }, 1800);
-                $(".selectedDoor").removeClass("selectedDoor");
-                $(".turnipone").removeClass("turnipone");
-            };
-
-            var kittenDoor = function() {
-                        if (doorOne == "kitten") {
-                            $("#doorOne").addClass("kitten").prepend("<img src='kotkitten.jpg' class='kittenimg'>");
-                            if (turnipReveal == "Door Two") {
-                                $("#doorThree").addClass("turniptwo").prepend("<img src='kotturnip.jpg' class='turnipimg'>");
-                            }
-                            else {
-                                $("#doorTwo").addClass("turniptwo").prepend("<img src='kotturnip.jpg' class='turnipimg'>");
-                            }
-                        }
-                        else if (doorTwo == "kitten") {
-                            $("#doorTwo").addClass("kitten").prepend("<img src='kotkitten.jpg' class='kittenimg'>");
-                            if (turnipReveal == "Door Three") {
-                                $("#doorOne").addClass("turniptwo").prepend("<img src='kotturnip.jpg' class='turnipimg'>");
-                            }
-                            else {
-                                $("#doorThree").addClass("turniptwo").prepend("<img src='kotturnip.jpg' class='turnipimg'>");
-                            }
-                        }
-                        else {
-                            $("#doorThree").addClass("kitten").prepend("<img src='kotkitten.jpg' class='kittenimg'>");
-                            if (turnipReveal == "Door One") {
-                                $("#doorTwo").addClass("turniptwo").prepend("<img src='kotturnip.jpg' class='turnipimg'>");
-                            }
-                            else {
-                                $("#doorOne").addClass("turniptwo").prepend("<img src='kotturnip.jpg' class='turnipimg'>");
-                            }
-                        }
-                    };
-
-            var switchStick = function () {
-                $("#switch").click( function() {
-                    if (foundTurnip == true) {
-                        $("#instructionJS").html("You made the right choice by switching! YOU FOUND THE KITTEN! <br> Next Step: Click on a door to keep on playing!");
-                        switchWon++;
-                    }
-                    else {
-                        $("#instructionJS").html("You should not have switched, you got stuck with the Turnip! <br> Next Step: Click on a door to keep on playing!");
-                        switchLost++;
-                    }
-                    kittenDoor();
-                    printSwitchScores();
-                    reloadGame();
-                });
-                $("#stick").click( function() {
-                    if (foundTurnip == true) {
-                        $("#instructionJS").html("You stuck to your guns and won a Turnip! <br> Next Step: Click on a door to keep on playing!");
-                        stickLost++;
-                    }
-                    else {
-                        $("#instructionJS").html("You had the kitten all along! You won the Kitten! <br> Next Step: Click on a door to keep on playing!");
-                        stickWon++;
-                    }
-                    kittenDoor();
-                    printStickScores();
-                    reloadGame();
-                });
-            }
-
-            var singleGame = function() {
-
-                doorOne = "turnip";
-                doorTwo = "turnip";
-                doorThree = "turnip";
-                kittenSelector = Math.random();
-                turnipSelector = Math.random();
-                randomKitten();
-
-                $(".doors>div").click(function() {
-
-                    $(".doors>div").off("click");
-
-                    var userSelection = $( this ).attr("id");
-                    var doorSelected = "";
-                    var makeReadable = function() {
-                        if (userSelection == "doorOne") {
-                            doorSelected = "Door One";
-                        }
-                        else if (userSelection == "doorTwo") {
-                            doorSelected = "Door Two";
-                        }
-                        else {
-                            doorSelected = "Door Three";
-                        }
-                    };
-                    makeReadable();
-                    var ssMessage = function() {
-                        $("#instructionJS").html("You selected " + doorSelected + ". There is a turnip behind " + turnipReveal + ". <br> Next Step: Would you like to STICK or SWITCH?");
-                        $('.doors').after("<div id='switchmessage'><button id='stick'>STICK!</button> or <button id='switch'>SWITCH!</button></div>")
-                    };
-
-                    var highlightSelection = function(doorId) {
-                        $(doorId).addClass("selectedDoor");
-                    };
-
-                    var turnipDoor = function(doorId) {
-                        $(doorId).addClass("turnipone").prepend("<img src='kotturnip.jpg' class='turnipimg'>");
-                    };
-
-
-                    if ( userSelection == "doorOne") {
-                        highlightSelection("#doorOne");
-                      if (doorOne == "turnip") {
-                        foundTurnip = true;
-                        if (doorTwo == "turnip") {
-                            turnipReveal = "Door Two";
-                            turnipDoor("#doorTwo");
-                        }
-                        else {
-                            turnipReveal = "Door Three";
-                            turnipDoor("#doorThree");
-                        }
-                    }
-                    else {
-                        foundTurnip = false;
-                        if (turnipSelector <= 0.5) {
-                            turnipReveal = "Door Two";
-                            turnipDoor("#doorTwo");
-                        }
-                        else {
-                            turnipReveal = "Door Three";
-                            turnipDoor("#doorThree");
-                        }
-                    }
-                } 
-                else if (userSelection == "doorTwo") {
-                    highlightSelection("#doorTwo");
-                   if (doorTwo == "turnip") {
-                    foundTurnip = true;
-                    if (doorOne == "turnip") {
-                     turnipReveal = "Door One";
-                     turnipDoor("#doorOne");
-                 }
-                 else {
-                     turnipReveal = "Door Three";
-                     turnipDoor("#doorThree");
-                 }
-             }
-             else {
-                foundTurnip = false;
-                if (turnipSelector <= 0.5) {
-                    turnipReveal = "Door One";
-                    turnipDoor("#doorOne");
-                }
-                else {
-                    turnipReveal = "Door Three";
-                    turnipDoor("#doorThree");
-                }
-            }
+function returnDoors(a, b, c) {
+    for(var i=0; i<doors.length; i++) {
+        if (doors[i][a] === b) {
+            return doors[i][c];
         }
-        else {
-            highlightSelection("#doorThree");
-           if (doorThree == "turnip") {
-            foundTurnip = true;
-            if (doorOne == "turnip") {
-             turnipReveal = "Door One";
-             turnipDoor("#doorOne");
-         }
-         else {
-             turnipReveal = "Door Two";
-             turnipDoor("#doorTwo");
-         }
-     }
-     else {
-        foundTurnip = false;
-        if (turnipSelector <= 0.5) {
-            turnipReveal = "Door One";
-            turnipDoor("#doorOne");
-        }
-        else {
-            turnipReveal = "Door Two";
-            turnipDoor("#doorTwo");
+} //end for
+} //end returnDoors
+
+function revealAllDoors() {
+    for(var i=0; i<doors.length; i++) {
+        var revealPrize = doors[i].prize;
+        $("#" + doors[i].getID).addClass(revealPrize);
+    }
+}
+
+function editDoor(a, b, c, d) {
+    for(var i=0; i<doors.length; i++) {
+        if (doors[i][a] === b) {
+            doors[i][c] = d;
         }
     }
 }
-ssMessage();
 
-switchStick();
+function changeSelection() {
+    $(".selected").removeClass("selected");
+    var newSelection = returnDoors("switchable", true, "getID");
+    $("#" + newSelection).addClass("selected");
+}
 
-return false;
+function beginGame() {
+    $(".doors").click(function() {
+        $(this).addClass("selected");
+        var doorSelection = $(this).attr("id");
+        var doorSelectionReadable = returnDoors("getID", doorSelection, "readable");
+        var currentPrize = returnDoors("getID", doorSelection, "prize");
+        var kittenDoor = returnDoors("prize", "kitten", "getID");
+        var revealingTurnip = returnDoors("turnipReveal", true, "getID");
+        editDoor("getID", doorSelection, "switchable", false);
 
+        function selectedMessage (a) {
+            var i = returnDoors("getID", a, "readable");
+            $("#message").html("<p>You selected " + doorSelectionReadable + ". There is a turnip behind " + i + ". Will you STICK or SWITCH?</p>").fadeIn();
+            $("#buttons").fadeIn();
+            $("#" + a).addClass("turnip");
+        }
+        $(".doors").off("click");
+
+        if (currentPrize === "kitten") {
+            selectedMessage(revealingTurnip);
+            editDoor("getID", revealingTurnip, "switchable", false);
+        }
+        else if (doorSelection === revealingTurnip) {
+            function findOtherTurnip(a, b, c) {
+                for(var i=0; i<doors.length; i++) {
+                    if (doors[i].prize === "turnip" && doors[i].turnipReveal === false) {
+                        return doors[i].getID;
+                    }
+                } //end for
+            } //end otherTurnip
+            var otherTurnip = findOtherTurnip();
+            selectedMessage(otherTurnip);
+            editDoor("getID", otherTurnip, "switchable", false);
+        }
+        else {
+            selectedMessage(revealingTurnip);
+            editDoor("getID", revealingTurnip, "switchable", false);
+        }
+
+$("#buttons > button").click(function() {
+     $("#buttons > button").off("click");
+
+    var buttonClicked = $(this).attr("id");
+
+
+function winLoseMessage(i, j) {
+    $("#buttons").hide();
+    if (i === "won") {
+        $("#message").html("You " + j + " and won! Congratulations on finding the kitten.");
+    }
+    else {
+        $("#message").html("You " + j + " and lost! Oh well, better luck next time.");
+    }
+    $("#replay").fadeIn();
+    revealAllDoors()
+}
+
+if (buttonClicked === "stick" && currentPrize === "kitten") {
+    stickScore++;
+    winLoseMessage("won", "stuck");
+}
+else if (buttonClicked === "stick" && currentPrize === "turnip") {
+    stickLost++;
+    winLoseMessage("lost", "stuck");
+}
+else if (buttonClicked === "switch" && currentPrize === "kitten") {
+    switchLost++;
+    winLoseMessage("lost", "switched");
+    changeSelection();
+}
+else {
+    switchScore++;
+    winLoseMessage("won", "switched");
+    changeSelection();
+}
+
+});// end click
 });
-};
 
-singleGame();
+} // end beginGame
 
-};
+beginGame();
 
-loadGame();
+function appendScore() {
+    gameTotal++;
+    var switchTotal = switchScore + switchLost;
+    var stickTotal = stickScore + stickLost;
+    if (gameTotal < 10) {
+        $("#score .warning").html("NO SCORE YET! You've only played " + gameTotal + " " + timePlural(gameTotal) + ". You must plat at least 10 games.");
+    } 
+    else {
+        $("#stickscore>div").html("Won " + stickScore + " out of " + stickTotal);
+        $("#switchscore>div").html("Won " + switchScore + " out of " + switchTotal);
+    }
+    if (gameTotal >= 10) {
+        $("#score>div").show();
+        $("#score .warning").hide();
+    }
+}
 
+$("#replay > button").click(function() {
+     $("#buttons > button").on("click");
+    appendScore();
+    $(".doors>div").fadeOut()
+    $(".doors").removeClass("selected");
+    setTimeout(function() {
+        $(".doors").removeClass("kitten turnip");
+        $(".doors>div").show();
+    }, 800);
+    $("#replay").hide();
+    $("#message").html("Pick another door to play again!");
+    prizeReset();
+    prizeSelector();
+    $(".doors").on("click", beginGame());
 });
+
+}); // end ready.

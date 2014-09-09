@@ -34,22 +34,42 @@
 </article>
 <article class="thegame">
 <h3>Play Kitten or Turnip</h3>
-<div id="instructionJS">
-Step One: Pick a door to find the Kitten!
+
+<div class="doorholder">
+<div id="doorOne" class="doors">
+    <div></div>
+    <i>1</i>
 </div>
-    <div class="doors">
-        <div id="doorOne" class="play">
-            1
-        </div>
-        <div id="doorTwo" class="play">
-            2
-        </div>
-        <div id="doorThree" class="play">
-            3
+
+<div id="doorTwo" class="doors">
+    <div></div>
+    <i>2</i>
+</div>
+
+<div id="doorThree" class="doors">
+    <div></div>
+    <i>3</i>
+</div>
+</div>
+
+<div class="instruct">
+<div id="message">Select a door to begin the game</div>
+<div id="buttons"><button id='stick'>Stick</button> <button id='switch'>Switch</button></div>
+<div id="replay"><button id="begin">Replay Game</button></div>
+</div>
+<div id="score">
+    <p class="warning">You Need to play 10 games before seeing a score</p>
+    <div id="stickscore">
+        <p>Stuck</p>
+        <div>
         </div>
     </div>
-    <div class="switchScore"></div>
-    <div class="stickScore"></div>
+    <div id="switchscore">
+        <p>Switch</p>
+        <div></div>
+    </div>
+</div>
+
     </article>
     <footer>
     <h3>Thank you for visiting</h3>
