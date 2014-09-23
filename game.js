@@ -224,7 +224,7 @@ $("#replay > button").click(function() {
     $(".doors, #message").fadeOut(300).fadeIn(600);
     setTimeout(function() {
         $(".doors").removeClass("kitten turnip selected");
-     }, 300);
+    }, 300);
     $("#replay").hide();
     $("#message").html("Pick another door to play again!");
     prizeReset();
