@@ -1,6 +1,7 @@
 html, body {
   padding: 0;
   margin: 0;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 
 p {
@@ -13,30 +14,153 @@ p {
 .doors {
   width: 100px;
   height: 200px;
-  background-color: blue;
+  background-color: #E21B5A;
   margin: 20px;
   float: left;
   text-align: center;
   color: #fff;
   font-size: 3em;
-  font-family: Helvetica;
+  font-family: 'Titan One', cursive;
   position: relative;
   padding: 50px;
   overflow: hidden;
+  text-shadow: -3px 3px 0 rgba(0,0,0,0.4);
+}
+
+.begin .doors:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.doors i {
+  width: 100%;
+  display: block;
 }
 
 .doors>div {
   position: absolute;
-
   width: 100%;
   height: 100%;
   top: -300px;
   left: 0;
   transition: top 1s;
+  z-index: 2;
+}
 
+.instruct button {
+  background-color: #E21B5A;
+  color: #fff;
+  width: 290px;
+  padding: 15px 10px;
+  margin: 20px;
+  position: absolute;
+  top: 20px;
+  text-transform: uppercase;
+  border: 0;
+  font-size: 20px;
+  font-family: 'Roboto Slab', serif;
+  letter-spacing: 2px;
+  margin: 0;
+  border-radius: 4px;
+  border-bottom: 5px solid #8D1038;
+}
+
+.instruct button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+#begin {
+  width: 600px;
+  right: 20px;
+}
+
+#stick {
+  right: 20px;
+}
+
+#switch {
+ left: 20px;
+}
+
+#switchscore {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  border-right: 2px solid #E21B5A;
+}
+
+#switchscore:after {
+  content: "vs";
+  padding: 10px;
+  position: absolute;
+  top: 75px;
+  right: 430px;
+  background-color: #E21B5A;
+  border-radius: 100%;
+  color: #fff;
+  font-weight: 700;
+}
+
+#stickscore {
+  float: right;
+  width: 50%;
+  text-align:  right;
+  box-sizing: border-box;
+  border-left: 3px solid #E21B5A;
 }
 
 
+
+#score {
+  position: relative;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+#score h4 {
+  line-height: 100%;
+  margin-bottom: 10px;
+  margin-top: 0;
+  color: #E21B5A;
+}
+
+#score, #score p {
+  text-transform: uppercase;
+  font-weight: 400!important;
+  line-height: 100%
+}
+
+h4, h5 {
+  font-size: 150%;
+}
+
+h5 {
+  margin: 20px 0 0 0;
+}
+
+#otherstats {
+  text-transform: none;
+  clear: both;
+  padding-top: 20px;
+}
+
+#score span {
+  font-size: 50%;
+  font-weight: 800;
+}
+
+#score strong {
+  font-size: 150%;
+}
+
+#score>div>div>p:first-of-type {
+  font-size: 185%;
+}
+
+#score>div>div>p:last-of-type {
+  margin-bottom: 0;
+}
 
 #message {
   clear: both;
@@ -44,17 +168,27 @@ p {
 
 .instruct {
   clear: both;
-  height: 100px;
-  padding: 20px;
-  margin: 10px auto;
+  height: 80px;
+  padding: 85px 20px 20px 20px;
+  margin: 20px auto;
   width: 600px;
-  background-color: yellow;
+  background-color: #fff;
+  color: #333;
+  border: 6px solid #f0f0f0;
+  overflow: hidden;
+  font-weight: 400;
   text-align: center;
+  position: relative;
+}
+
+.instruct p {
+  font-weight: 400;
 }
 
 .doorholder {
   width: 720px;
   margin: 10px auto;
+  overflow: hidden;
 }
 
 .kitten>div {
@@ -75,47 +209,18 @@ p {
 }
 
 .selected {
-  box-shadow: 0 0 0 10px rgba(255,0,0,1);
+  box-shadow: 0 0 0 10px rgba(240,240,240,1);
+  background-color: #C9144E;
 }
 
-/*.doors div {
- padding: 40px;
- margin: 10px;
- width: 150px;
- height: 200px;
- float: left;
- text-align: center;
- background-color: #9E0C39;
- overflow: hidden;
- position: relative;
- font-family: 'Titan One', cursive;
- color: #fff;
- font-size: 4em;
+.selected i {
+  opacity: 0.8;
 }
 
-.doors img {
-  width: 280px;
-  height: auto;
-  position: absolute;
-  top: 0;
-  right: 0;
+.complete {
+  box-shadow: 0 0 0 10px rgba(226,27,90,1);
+  transition: all .5s;
 }
-
-.selectedDoor {
-  background-color: green!important;
-}
-
-.turnipone {
-  background-color: pink!important;
-}
-
-#switchmessage {
-  clear: both;
-}
-
-.switchScore, .stickScore {
-  clear: both;
-}*/
 
 header {
   height: 100%;
@@ -167,10 +272,15 @@ h2 {
 }
 
 article, footer {
-  padding: 80px 25%;
+  padding: 80px 20px;
   box-sizing: border-box;
   moz-box-sizing: border-box;
   min-height: 100%;
+}
+
+article>div, footer>div {
+  width: 900px;
+  margin: 0 auto;
 }
 
 article h3 {

@@ -1,8 +1,7 @@
 $(function() { 
 
-$("#buttons").hide();
-$("#replay").hide();
-$("#score>div").hide();
+$("#buttons, #replay, #score>div").hide();
+$(".doorholder").addClass("begin");
 
 var doors = [{getID: "doorOne",
     prize: "turnip",
@@ -100,7 +99,7 @@ function revealAllDoors() {
         var revealPrize = doors[i].prize;
         $("#" + doors[i].getID).addClass(revealPrize);
     }
-}
+}//end revealAllDoors
 
 function editDoor(a, b, c, d) {
     for(var i=0; i<doors.length; i++) {
@@ -108,16 +107,54 @@ function editDoor(a, b, c, d) {
             doors[i][c] = d;
         }
     }
-}
+}//end editDoor
 
 function changeSelection() {
     $(".selected").removeClass("selected");
     var newSelection = returnDoors("switchable", true, "getID");
-    $("#" + newSelection).addClass("selected");
-}
+    $("#" + newSelection).addClass("selected complete");
+}//end changeSelection
+
+function appendScore() {
+    gameTotal++;
+    var switchTotal = switchScore + switchLost;
+    var stickTotal = stickScore + stickLost;
+    var overallStickWin = stickScore + switchLost;
+    var overallSwitchWin = switchScore + stickLost;
+    var switchTotalPercent = (switchScore + stickLost) / gameTotal * 100;
+    var stickWinPercent = stickScore / stickTotal * 100;
+    var switchWinPercent = switchScore / switchTotal * 100;
+
+
+    if (gameTotal < 10) {
+        $("#score .warning").html("<p>You've only played <strong>" + gameTotal + " " + timePlural(gameTotal) + "</strong>. You must play at least <strong>10 times</strong>.</p>");
+    } 
+    else {
+        if (stickTotal < 3) {
+            $("#stickscore>div").html("<p>You've chosen to switch a lot, try sticking a few times</p>");
+            $("#switchscore>div").html("<h5>Won</h5> <p><strong>" + stickScore + "</strong> <span>out of</span> <strong>" + stickTotal + "</strong></p><p> That's <strong>" + Math.round(stickWinPercent) + "%</strong> of the time.</p>");
+        }
+        else if (switchTotal < 3) {
+            $("#switchscore>div").html("<p>You've chosen to stick a lot, try switching a few times</p>");
+            $("#stickscore>div").html("<h5>Won</h5> <p><strong>" + stickScore + "</strong> <span>out of</span> <strong>" + stickTotal + "</strong></p><p> That's <strong>" + Math.round(stickWinPercent) + "%</strong> of the time.</p>");
+        }
+        else {
+        $("#stickscore>div").html("<h5>Won</h5> <p><strong>" + stickScore + "</strong> <span>out of</span> <strong>" + stickTotal + "</strong></p><p> That's <strong>" + Math.round(stickWinPercent) + "%</strong> of the time.</p>");
+        $("#switchscore>div").html("<h5>Won</h5> <p><strong>" + switchScore + "</strong> <span>out of</span> <strong>" + switchTotal + "</strong></p><p> That's <strong>" + Math.round(switchWinPercent) + "%</strong> of the time.</p>");
+        $("#otherstats").show().html("<p>If you had switched for every game you would have won " + overallSwitchWin + " times.<br> If you had stuck every time you would have won " + overallStickWin + " times.</p>");
+        }
+    }
+    if (gameTotal >= 10) {
+        $("#score>div").show();
+        $("#score .warning").hide();
+        console.log(switchTotalPercent);
+    }
+
+}//end appendScore
 
 function beginGame() {
     $(".doors").click(function() {
+        $(".doorholder").removeClass("begin");
         $(this).addClass("selected");
         var doorSelection = $(this).attr("id");
         var doorSelectionReadable = returnDoors("getID", doorSelection, "readable");
@@ -128,7 +165,7 @@ function beginGame() {
 
         function selectedMessage (a) {
             var i = returnDoors("getID", a, "readable");
-            $("#message").html("<p>You selected " + doorSelectionReadable + ". There is a turnip behind " + i + ". Will you STICK or SWITCH?</p>").fadeIn();
+            $("#message").html("<p>You selected " + doorSelectionReadable + ". There is a turnip behind " + i + ". Will you <strong>switch</strong> or <strong>stick</strong> with your original choice?</p>").fadeIn();
             $("#buttons").fadeIn();
             $("#" + a).addClass("turnip");
         }
@@ -160,17 +197,19 @@ $("#buttons > button").click(function() {
 
     var buttonClicked = $(this).attr("id");
 
-
 function winLoseMessage(i, j) {
-    $("#buttons").hide();
+    $("#buttons").delay(500).fadeOut();
     if (i === "won") {
-        $("#message").html("You " + j + " and won! Congratulations on finding the kitten.");
+        $("#message").html("<p>You " + j + " and won! Congratulations on finding the kitten.</p>");
     }
     else {
-        $("#message").html("You " + j + " and lost! Oh well, better luck next time.");
+        $("#message").html("<p>You " + j + " and lost! Oh well, better luck next time.</p>");
     }
     $("#replay").fadeIn();
-    revealAllDoors()
+    $(".selected").addClass("complete");
+    setTimeout(function() {
+        revealAllDoors();
+    }, 300);
 }
 
 if (buttonClicked === "stick" && currentPrize === "kitten") {
@@ -183,14 +222,16 @@ else if (buttonClicked === "stick" && currentPrize === "turnip") {
 }
 else if (buttonClicked === "switch" && currentPrize === "kitten") {
     switchLost++;
-    winLoseMessage("lost", "switched");
     changeSelection();
+    winLoseMessage("lost", "switched");
 }
 else {
     switchScore++;
-    winLoseMessage("won", "switched");
     changeSelection();
+    winLoseMessage("won", "switched");
 }
+
+appendScore();
 
 });// end click
 });
@@ -199,34 +240,18 @@ else {
 
 beginGame();
 
-function appendScore() {
-    gameTotal++;
-    var switchTotal = switchScore + switchLost;
-    var stickTotal = stickScore + stickLost;
-    var stickWinPercent = stickScore / stickTotal * 100;
-var switchWinPercent = switchScore / switchTotal * 100;
-    if (gameTotal < 10) {
-        $("#score .warning").html("NO SCORE YET! You've only played " + gameTotal + " " + timePlural(gameTotal) + ". You must plat at least 10 games.");
-    } 
-    else {
-        $("#stickscore>div").html("Won " + stickScore + " out of " + stickTotal + "<br> That's " + Math.round(stickWinPercent) + "% of the time.");
-        $("#switchscore>div").html("Won " + switchScore + " out of " + switchTotal + "<br> That's " + Math.round(switchWinPercent) + "% of the time.");
-    }
-    if (gameTotal >= 10) {
-        $("#score>div").show();
-        $("#score .warning").hide();
-    }
-}
+
 
 $("#replay > button").click(function() {
      $("#buttons > button").on("click");
-    appendScore();
+    // appendScore();
     $(".doors, #message").fadeOut(300).fadeIn(600);
     setTimeout(function() {
-        $(".doors").removeClass("kitten turnip selected");
+        $(".doors").removeClass("kitten turnip selected complete");
+        $(".doorholder").addClass("begin");
+        $("#message").html("<p>Pick another door to play again!</p>");
     }, 300);
     $("#replay").hide();
-    $("#message").html("Pick another door to play again!");
     prizeReset();
     prizeSelector();
     $(".doors").on("click", beginGame());
