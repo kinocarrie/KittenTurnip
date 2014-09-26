@@ -20,11 +20,23 @@ p {
   text-align: center;
   color: #fff;
   font-size: 3em;
-  font-family: 'Titan One', cursive;
+  /*font-family: "Roboto", Helvetica, Arial, sans-serif;*/
+/*    font-family: 'Titan One', cursive;*/
+  font-family: 'Roboto Slab', serif;
   position: relative;
   padding: 50px;
   overflow: hidden;
-  text-shadow: -3px 3px 0 rgba(0,0,0,0.4);
+  font-weight: 700;
+}
+
+.doors i {
+    font-style: normal;
+    position: absolute;
+    font-size: 400px;
+    transform: rotate(15deg);
+    top: -100px;
+    right: -20px;
+    text-shadow: -10px -10px 0 #8D1038;
 }
 
 .begin .doors:hover {
@@ -58,16 +70,20 @@ p {
   text-transform: uppercase;
   border: 0;
   font-size: 20px;
-  font-family: 'Roboto Slab', serif;
+/*  font-family: 'Roboto Slab', serif;*/
+font-family: "Roboto", Helvetica, Arial, sans-serif;
+font-weight: 700;
   letter-spacing: 2px;
   margin: 0;
   border-radius: 4px;
   border-bottom: 5px solid #8D1038;
+  text-shadow: 0 -1px 0 #8D1038;
 }
 
 .instruct button:hover {
   opacity: 0.7;
   cursor: pointer;
+  text-shadow: 0 1px 0 #8D1038;
 }
 
 #begin {
@@ -88,18 +104,22 @@ p {
   width: 50%;
   box-sizing: border-box;
   border-right: 2px solid #E21B5A;
+  padding-right: 40px;
+  height: 220px;
 }
 
 #switchscore:after {
   content: "vs";
   padding: 10px;
   position: absolute;
-  top: 75px;
-  right: 430px;
-  background-color: #E21B5A;
-  border-radius: 100%;
-  color: #fff;
+  top: 85px;
+  font-size: 25px;
+  line-height: 25px;
+  right: 426px;
+  background-color: #fff;
+  color: #E21B5A;
   font-weight: 700;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 
 #stickscore {
@@ -107,15 +127,16 @@ p {
   width: 50%;
   text-align:  right;
   box-sizing: border-box;
-  border-left: 3px solid #E21B5A;
+  border-left: 2px solid #E21B5A;
+  padding-left: 40px;
+  height: 220px;
 }
-
-
 
 #score {
   position: relative;
   margin-top: 40px;
   margin-bottom: 20px;
+  overflow: hidden;
 }
 
 #score h4 {
@@ -125,40 +146,155 @@ p {
   color: #E21B5A;
 }
 
-#score, #score p {
-  text-transform: uppercase;
-  font-weight: 400!important;
-  line-height: 100%
+.scorebar {
+  width: 90%;
+  height: 20px;
+  background-color: #f0f0f0;
+  overflow:hidden;
+  margin: 20px 0;
 }
 
-h4, h5 {
+.scorebar>div {
+  background-color: #E21B5A;
+  height: 20px;
+  transition: all 1s;
+}
+
+#stickscore .scorebar {
+  float:right;
+}
+
+#switchscore .scorebar>div {
+  float:left;
+}
+
+#stickscore .scorebar>div {
+  float:right;
+}
+
+.scoring p {
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+#score p {
+  margin: 20px 0;
+}
+
+h4 {
   font-size: 150%;
 }
 
 h5 {
-  margin: 20px 0 0 0;
+  margin: 20px 0;
+  font-weight: 400;
+  font-size: 200%;
+  line-height: 100%;
 }
 
 #otherstats {
-  text-transform: none;
-  clear: both;
   padding-top: 20px;
 }
 
+#otherstats p {
+  text-transform: none;
+  line-height: 150%;
+}
+
+.clearfix {
+  clear: both;
+}
+
+#otherstats p:last-of-type strong {
+  font-size: 100%;
+}
+
+.finalpercent {
+float: left;
+margin: 40px 40px 40px 0;
+padding: 50px 10px;
+color: #fff;
+text-align: center;
+background: #f0f0f0;
+position: relative;
+width: 240px;
+min-height: 150px;
+transition: all 2s;
+}
+
+.finalpercent:hover .finalpercentbar{
+  transition: all 1s;
+  height: 100%!important;
+}
+
+.finalpercent p {
+  position: relative;
+  z-index: 2;
+  text-transform: uppercase!important;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.finalpercent p strong {
+font-size: 110px!important;
+line-height: 50px!important;
+margin-bottom: 20px;
+display: block;
+padding-bottom: 20px;
+}
+
+.finalpercentbar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background: #E21B5A;
+  transition: all 1s;
+}
+
+.arrow:before {
+  content: "\2b06";
+  position: absolute;
+  top: 40px;
+  display:block;
+  margin: 0 auto;
+  text-align:center;
+  color: #E21B5A;
+  right: 0;
+  font-size: 50px;
+  width: 100%;
+  text-shadow: 0 2px 0 #8D1038;
+}
+
 #score span {
-  font-size: 50%;
-  font-weight: 800;
+/*  font-size: 50%;
+  font-weight: 800;*/
+  font-size: 18px;
 }
 
 #score strong {
   font-size: 150%;
 }
 
-#score>div>div>p:first-of-type {
+#score .warning strong {
+  font-size: 100%;
+}
+
+.warning {
+  text-align: center;
+}
+
+#stickscore>div>p:first-of-type, #switchscore>div>p:first-of-type {
   font-size: 185%;
 }
 
-#score>div>div>p:last-of-type {
+.smaller {
+  font-size: 100%;
+}
+
+#stickscore>div>p:last-of-type, #switchscore>div>p:last-of-type {
   margin-bottom: 0;
 }
 
@@ -287,6 +423,37 @@ article h3 {
   font-family: 'Roboto Slab', serif;
   font-size: 3em;
   font-weight: 700;
+}
+
+.thegame h3 {
+  font-size: 60px;
+  font-weight: 400;
+  font-style: italic;
+  width: 100%;
+  text-shadow: -2px 2px 0 #8D1038;
+  line-height: 100%;
+  transform: rotate(-5deg);
+  /* Safari */
+  -webkit-transform: rotate(-5deg);
+  /* Firefox */
+  -moz-transform: rotate(-5deg);
+  /* IE */
+  -ms-transform: rotate(-5deg);
+  /* Opera */
+  -o-transform: rotate(-5deg);
+  color: #E21B5A;
+  font-family: 'Titan One', cursive;
+  line-height: 0;
+}
+
+.playtitle {
+  font-weight: 400;
+  /*text-shadow: -1px 1px 0 #8D1038;*/
+  font-family: 'Roboto Slab', serif;
+  letter-spacing: 1px;
+  margin: -20px 0 40px 300px;
+  font-size: 24px;
+  color: #E21B5A;
 }
 
 .monty {

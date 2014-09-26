@@ -36,7 +36,8 @@
 </article>
 <article class="thegame">
 <div>
-<h3>Play Kitten or Turnip</h3>
+<h3>Kitten <span>or</span> Turnip</h3>
+<div class="playtitle">(Play The Game)</div>
 
 <div class="doorholder">
 <div id="doorOne" class="doors">
@@ -58,19 +59,23 @@
 <div class="instruct">
 <div id="buttons"><button id='stick'>Stick</button> <button id='switch'>Switch</button></div>
 <div id="replay"><button id="begin">Replay Game</button></div>
-<div id="message"><p>Select a door to begin the game.</p></div>
+<div id="message"><p class="arrow">Select a door to begin the game.</p></div>
 </div>
-<div id="score">
-    <p class="warning">You Need to play 10 games before seeing a score.</p>
+<div id="score" class="scoring">
+    <p class="warning">You Need to play <strong>10 games</strong> before seeing a score.</p>
         <div id="switchscore">
         <h4>Switching</h4>
-        <div></div>
+        <div class="scoredetails"></div>
+        <div class="scorebar"><div></div></div>
     </div>
     <div id="stickscore">
         <h4>Sticking</h4>
-        <div>
+        <div class="scoredetails">
         </div>
+        <div class="scorebar"><div></div></div>
     </div>
+    <div class="clearfix"></div>
+    <div class='finalpercent'><div class='finalpercentbar'></div><p></p></div>
     <div id="otherstats">
     </div>
 </div>
