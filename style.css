@@ -7,16 +7,20 @@ html, body {
 p {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   line-height: 150%;
-  font-weight: 100;
   font-size: 18px;
 }
 
+.colour p {
+  font-weight: 100;
+}
+
 .doors {
-  width: 100px;
+  width: 150px;
   height: 200px;
   background-color: #E21B5A;
   margin: 20px;
-  float: left;
+/*  float: left;*/
+display: inline-block;
   text-align: center;
   color: #fff;
   font-size: 3em;
@@ -55,8 +59,12 @@ p {
   height: 100%;
   top: -300px;
   left: 0;
-  transition: top 1s;
+  transition: none;
   z-index: 2;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #f0f0f0; 
 }
 
 .instruct button {
@@ -89,6 +97,103 @@ font-weight: 700;
 #begin {
   width: 600px;
   right: 20px;
+}
+
+#stickyscore {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 100;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+}
+
+#stickyscore h5 {
+  font-size: 14px;
+  line-height: 100%;
+  margin: 0;
+}
+
+#stickyscore>div {
+  padding: 10px;
+}
+
+.stickyplay {
+  text-align: center;
+}
+
+.stickyscoring {
+  width: 50%;
+  box-sizing: border-box;
+  float: left;
+  display: none;
+}
+
+.stickyscoring.sticks {
+  text-align: right;
+}
+
+.stickybar {
+  background-color: #f0f0f0;
+  width: 50%;
+  height: 4px;
+  position: absolute;
+  bottom: -4px;
+}
+
+#stickyscore p {
+  margin:0;
+  padding:0;
+  line-height: 100%;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.stickybar.switchbar {
+  left: 0;
+  box-shadow: inset -2px 0 0 #E21B5A;
+}
+
+.stickyscoring.switchs:after {
+  content: "vs";
+  position: absolute;
+  top: 9px;
+  width: 26px;
+  margin-right: -13px;
+  text-align: center;
+  right: 50%;
+  font-weight: 700;
+  font-size: 12px;
+  color: #E21B5A;
+}
+
+.stickybar.stickbar {
+  right: 0;
+  box-shadow: inset 2px 0 0 #E21B5A;
+}
+
+.stickybar>div {
+  background-color: #E21B5A;
+  height: 4px;
+  clear: both;
+}
+
+.stickybar.stickbar>div {
+  transition: all 1s;
+  float: right;
+}
+
+.stickybar.switchbar>div {
+  transition: all 1s;
+}
+
+.stickyscoring span {
+  font-weight: 700;
+  color: #E21B5A;
 }
 
 #stick {
@@ -322,26 +427,23 @@ padding-bottom: 20px;
 }
 
 .doorholder {
-  width: 720px;
+  width: 900px;
   margin: 10px auto;
+  text-align: center;
   overflow: hidden;
 }
 
 .kitten>div {
-
   transition: all 1s;
-
-  background-image: url("http://placekitten.com/g/200/300");
+  background-image: url("kittendoor.png");
   top: 0;
 
 }
 
 .turnip>div {
-  background-color: green;
   transition: all 1s;
-  background-image: url("http://www.placecage.com/c/200/300");
+  background-image: url("turnipdoor.png");
   top: 0;
-
 }
 
 .selected {
@@ -354,7 +456,7 @@ padding-bottom: 20px;
 }
 
 .complete {
-  box-shadow: 0 0 0 10px rgba(226,27,90,1);
+  box-shadow: 0 0 0 10px rgba(226, 27, 90, 1);
   transition: all .5s;
 }
 
@@ -414,6 +516,10 @@ article, footer {
   min-height: 100%;
 }
 
+footer {
+  min-height: 200%;
+}
+
 article>div, footer>div {
   width: 900px;
   margin: 0 auto;
@@ -457,16 +563,16 @@ article h3 {
 }
 
 .monty {
-  background-color: #333333;
-  color: #fff;
+  background-color: #fff;
+  color: #333;
 }
 
 .monty h3 {
-  color: #fff;
+  color: #E21B5A;
 }
 
 .howto {
-  background-color: #83A300;
+  background-color: #333;
   color: #fff;
 }
 
@@ -477,6 +583,7 @@ article h3 {
 
 footer {
   background-color: #E21B5A;
+  color: #fff;
 }
 
 #instructionJS {

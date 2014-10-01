@@ -1,6 +1,6 @@
-$(function() { 
+function play() {
 
-$("#buttons, #replay, #score>div, #switchscore .scorebar, #stickscore .scorebar").hide();
+$("#buttons, #replay, #score>div, #switchscore .scorebar, #stickscore .scorebar, #stickyscore").hide();
 $(".doorholder").addClass("begin");
 
 var doors = [{getID: "doorOne",
@@ -55,32 +55,26 @@ function prizeReset() {
 
 function prizeSelector() {
 
-if (kittenSelector <= 0.33333333333333) {
-    doors[0].prize = "kitten";
-    if (turnipSelector <= 0.5) {
-        doors[1].turnipReveal = true;
+    function turnipRevealSelector(a, b) {
+        if (turnipSelector <= 0.5) {
+        doors[a].turnipReveal = true;
     }
     else {
-        doors[2].turnipReveal = true;
-    }
+        doors[b].turnipReveal = true;
+    }//end ifelse
+    }//end turnipRevealSelector
+
+if (kittenSelector <= 0.33333333333333) {
+    doors[0].prize = "kitten";
+    turnipRevealSelector(1, 2);
 } //end if
 else if (kittenSelector <= 0.666666666666666) {
     doors[1].prize = "kitten";
-    if (turnipSelector <= 0.5) {
-        doors[0].turnipReveal = true;
-    }
-    else {
-        doors[2].turnipReveal = true;
-    }
+    turnipRevealSelector(0, 2);
 } //end else if
 else {
     doors[2].prize = "kitten";
-    if (turnipSelector <= 0.5) {
-        doors[0].turnipReveal = true;
-    }
-    else {
-        doors[1].turnipReveal = true;
-    }
+    turnipRevealSelector(0, 1);
 } // end else
 } //end prizeSelector
 
@@ -126,10 +120,10 @@ function appendScore() {
     var switchWinPercent = switchScore / switchTotal * 100;
 
     function goodBadResults() {
-        if (switchTotalPercent < 50 && gameTotal > 30) {
-            return "<strong>Wow, you've had really bad luck!<strong> Sometimes that's life. Thankfully you can refresh the game and play again, cross your fingers you won't be so unlucky next time.";
+        if (switchTotalPercent < 55 && gameTotal > 30) {
+            return "<strong>Wow, you've had really bad luck!</strong> Sometimes that's life. Thankfully you can refresh the game and play again. Cross your fingers you won't be so unlucky next time.";
         }
-        else if (switchTotalPercent < 50) {
+        else if (switchTotalPercent < 55) {
             return "Sometimes luck isn't on your side and it can ruin your results. The more you play, the better your results should be. <strong>Try playing at least 30 games for better results</strong>.";
         }
         else if (switchTotalPercent < 60) {
@@ -142,6 +136,8 @@ function appendScore() {
 
     if (gameTotal < 10) {
         $("#score .warning").html("<p>You've only played <strong>" + gameTotal + " " + wordPlural(gameTotal, "time", "times") + "</strong>. You must play at least <strong>10 times</strong>.</p>");
+        $("#stickyscore").fadeIn().addClass("active");
+        $("#stickyscore .stickyplay").html("<p>You've played " + gameTotal + " " + wordPlural(gameTotal, "time", "times") + "</p>");
     } 
     else {
         if (stickTotal < 3) {
@@ -162,12 +158,16 @@ function appendScore() {
         }
     } // end if
     if (gameTotal >= 10) {
+        $("#stickyscore .stickyplay").hide();
         $("#score>div").show();
         $("#score .warning").hide();
-        $("#switchscore .scorebar>div").css("width", Math.round(switchWinPercent) + "%");
-        $("#stickscore .scorebar>div").css("width", Math.round(stickWinPercent) + "%");
+        $("#switchscore .scorebar>div, .stickyscoring .switchbar>div").css("width", Math.round(switchWinPercent) + "%");
+        $("#stickscore .scorebar>div, .stickyscoring .stickbar>div").css("width", Math.round(stickWinPercent) + "%");
         $(".finalpercent p").html("<strong>" + Math.round(switchTotalPercent) + "%</strong> if you always switched");
         $(".finalpercent .finalpercentbar").css("height", Math.round(switchTotalPercent) + "%");
+        $(".stickyscoring").show();
+        $(".stickyscoring.switchs span").html(switchScore + "/" + switchTotal);
+        $(".stickyscoring.sticks span").html(stickScore + "/" + stickTotal);
     } //end if
 
 }//end appendScore
@@ -276,4 +276,4 @@ $("#replay > button").click(function() {
     $(".doors").on("click", beginGame());
 });//end replay click
 
-}); // end ready.
+}; // end play.

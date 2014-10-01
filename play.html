@@ -9,6 +9,11 @@
    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
    <script src="game.js"></script>
+   <script>
+   $(function() {
+    play();
+   });
+   </script>
 
 </head>
 <body>
@@ -28,14 +33,14 @@
 <p>Quisque est sem, tempor a odio id, tristique adipiscing diam. Suspendisse viverra posuere ipsum sed pretium. Suspendisse potenti. Morbi felis quam, sagittis vitae tincidunt eu, mollis vel est. Mauris aliquam rutrum nibh eu porttitor. Nulla vel ante metus. Maecenas rutrum commodo sagittis. Sed elementum pharetra justo, et faucibus nibh interdum quis.</p>
 </div>
 </article>
-<article class="howto">
+<article class="howto colour">
 <div>
 <h3>How to Play</h3>
 <p><strong>Lorem ipsum dolor sit amet,</strong> consectetur adipiscing elit. Donec auctor lacinia interdum. Curabitur vel fermentum libero, nec dignissim enim. Vivamus vitae est massa. Vivamus eget nisi sit amet neque porta pharetra eget ac ligula. Donec dui dui, convallis et porta vehicula, viverra sodales urna. Fusce suscipit, nulla sed vestibulum porta, quam nulla posuere lorem, quis feugiat justo erat in neque. Donec quis velit metus. Mauris id nunc malesuada, lobortis erat ut, suscipit nulla. Duis et vulputate mauris. Curabitur at nibh in felis sagittis fermentum ac sed nulla. Maecenas lorem eros, porttitor nec tellus ac, ultrices mollis odio.</p>
 </div>
 </article>
 <article class="thegame">
-<div>
+<div id="scrolling">
 <h3>Kitten <span>or</span> Turnip</h3>
 <div class="playtitle">(Play The Game)</div>
 
@@ -81,10 +86,39 @@
 </div>
 </div>
     </article>
-    <footer>
+    <footer class="colour">
     <div>
-    <h3>Thank you for visiting</h3>
+    <p>Thank you for visiting</p>
     </div>
     </footer>
+    <div id="stickyscore">
+    <div class="stickyplay"></div>
+        <div class="stickyscoring switchs"><h5><span></span> Switch Score</h5>
+        <div class="switchbar stickybar"><div></div></div>
+        </div>
+        <div class="stickyscoring sticks"><h5>Stick Score <span></span></h5>
+        <div class="stickbar stickybar"><div></div></div>
+        </div>
+    </div>
+
+<script>
+$(document).ready(function(){
+$(window).scroll(function(){
+var windowPos = $(window).scrollTop();
+var divPos = $(".thegame").offset().top;
+var divHeight = $(".thegame").height();
+if (windowPos >= divPos && windowPos <= (divPos + divHeight)) {
+    $("#stickyscore.active").fadeIn("slow");
+}
+else if (windowPos >= divPos && windowPos >= (divPos + divHeight)){
+    $("#stickyscore.active").fadeOut("fast");
+}
+else {
+    $("#stickyscore.active").fadeOut("fast");
+}//end ifelse
+});//end scroll
+});//end ready
+</script>
+
 </body>
 </html>
