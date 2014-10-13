@@ -236,10 +236,12 @@ function winLoseMessage(i, j) {
 if (buttonClicked === "stick" && currentPrize === "kitten") {
     stickScore++;
     winLoseMessage("won", "stuck");
+    $(".selected").addClass("stickdoor");
 }
 else if (buttonClicked === "stick" && currentPrize === "turnip") {
     stickLost++;
     winLoseMessage("lost", "stuck");
+    $(".selected").addClass("stickdoor");
 }
 else if (buttonClicked === "switch" && currentPrize === "kitten") {
     switchLost++;
@@ -266,7 +268,7 @@ $("#replay > button").click(function() {
     // appendScore();
     $(".doors, #message").delay(100).fadeOut(300).fadeIn(600);
     setTimeout(function() {
-        $(".doors").removeClass("kitten turnip selected complete");
+        $(".doors").removeClass("kitten turnip selected complete stickdoor");
         $(".doorholder").addClass("begin");
         $("#message").html("<p class='arrow'>Pick another door to play again!</p>");
     }, 400);

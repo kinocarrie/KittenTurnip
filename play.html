@@ -26,20 +26,51 @@
 <article class="monty">
 <div>
 <h3>What Is The Monty Hall Problem?</h3>
-<p><strong>Lorem ipsum dolor sit amet,</strong> consectetur adipiscing elit. Donec auctor lacinia interdum. Curabitur vel fermentum libero, nec dignissim enim. Vivamus vitae est massa. Vivamus eget nisi sit amet neque porta pharetra eget ac ligula. Donec dui dui, convallis et porta vehicula, viverra sodales urna. Fusce suscipit, nulla sed vestibulum porta, quam nulla posuere lorem, quis feugiat justo erat in neque. Donec quis velit metus. Mauris id nunc malesuada, lobortis erat ut, suscipit nulla. Duis et vulputate mauris. Curabitur at nibh in felis sagittis fermentum ac sed nulla. Maecenas lorem eros, porttitor nec tellus ac, ultrices mollis odio.</p>
+<div class="textcontent">
+<p><strong>The Monty Hall Problem is a mathematical brain-teaser</strong> loosely based on a game show. Let me explain the game at the heart of the problem:</p> 
 
-<p>Integer volutpat ante in sapien tincidunt facilisis. Vivamus nec leo eget massa blandit consectetur. Integer diam tortor, condimentum non commodo id, condimentum eu turpis. Nunc tempus elit sit amet orci venenatis elementum. Sed quis venenatis risus. Aenean accumsan eget nisi laoreet aliquet. Sed sed consectetur velit. Etiam interdum dui sed sodales pulvinar. Sed dignissim tempor lacus eu bibendum.</p>
+<blockquote>There are three doors. Hidden behind one door is a car, behind the other two doors are goats. Mr Monty (our game host) asks you to select a door and you'll win whatever is behind the door. Once you have chosen, Mr Monty will open a door different from the one you selected to reveal one of the goats. He then asks you a question: "Do you still want to stick with your original choice or do you want to switch to the remaining upopened door? Now's your chance to change your mind."</blockquote>
 
-<p>Quisque est sem, tempor a odio id, tristique adipiscing diam. Suspendisse viverra posuere ipsum sed pretium. Suspendisse potenti. Morbi felis quam, sagittis vitae tincidunt eu, mollis vel est. Mauris aliquam rutrum nibh eu porttitor. Nulla vel ante metus. Maecenas rutrum commodo sagittis. Sed elementum pharetra justo, et faucibus nibh interdum quis.</p>
+<p>You end up with two doors to choose from; one contains the car and the other contains a goat. <strong>What are the odds of picking the winning door? Are you better off sticking with your original choice or switching to the other door?</strong></p>
+
+<p class="highlight hone"><strong>Are your chances of winning 50/50?</strong></p>
+
+<p>Many people, including respected mathematicians understand that there are two doors to choose from: it's essentially heads-or-tails whether you will win a car or a goat. In other words, it appears to be <strong>50/50</strong>. <i>However, it's not that simple.</i> The first part of the game plays an important roll in your chances of winning the game.</p>
+
+<p><strong>Let me explain.</strong> At the beginning of the game you have three doors. The odds of finding the car at this point is <strong>1 out of 3</strong>. You decide to pick door number one. Mr Monty opens up door number three to show you a goat. The odds of a car being behind door number one, the one you picked, is <strong>still 1 out of 3</strong>. It doesn't change.</p>
+
+<p>"Wait, those aren't good odds! I need that car so I can drive my goats to the vet! What should I do?!" I hear you say.</p>
+
+<p class="highlight htwo"><strong>Should you <i>SWITCH</i> to increase your chances of winning?</strong></p>
+
+<p>What you need to do to gave a better chance of winning is <strong>switch doors</strong>. If you stick with your first choice you will only have a 1 in 3 chance of winning that car: the same as you did at the beginning. It is more likely to be a goat behind your first choice: a 2 in 3 probability. As the other goat has been taken out of the equation there is a <strong>2 in 3 chance the car is behind the other door.</strong></p>
+
+<blockquote class="clearfix"><strong>Still not convinced?</strong> You're not alone. That's why I created a simulation of this game. You can <a href="#kt">play it and see for yourself</a> or <a href="#">read more about The Monty Hall Problem</a>.</blockquote>
+</div>
 </div>
 </article>
 <article class="howto colour">
 <div>
-<h3>How to Play</h3>
-<p><strong>Lorem ipsum dolor sit amet,</strong> consectetur adipiscing elit. Donec auctor lacinia interdum. Curabitur vel fermentum libero, nec dignissim enim. Vivamus vitae est massa. Vivamus eget nisi sit amet neque porta pharetra eget ac ligula. Donec dui dui, convallis et porta vehicula, viverra sodales urna. Fusce suscipit, nulla sed vestibulum porta, quam nulla posuere lorem, quis feugiat justo erat in neque. Donec quis velit metus. Mauris id nunc malesuada, lobortis erat ut, suscipit nulla. Duis et vulputate mauris. Curabitur at nibh in felis sagittis fermentum ac sed nulla. Maecenas lorem eros, porttitor nec tellus ac, ultrices mollis odio.</p>
+<h3>The Rules Of The Game</h3>
+<div class="textcontent">
+<!-- <p>Kitten or Turnip is a simulation of The Monty Hall Problem, here are the simple rules to play the game.</p> -->
+<ul>
+<li>Select a door.</li>
+<li>Wait for a turnip to be revealed. You'll be asked if you want to <strong>stick</strong> or <strong>switch</strong>.</li>
+<li>Choose to stick with your first choice or switch to the other unopened door.</li>
+<li>All doors will be revealed to show you your prize!</li>
+<li>It doesn't matter if you win or loose, keep on playing by pressing the <strong>replay game</strong> button.</li>
+<li>Play again and again. You must play <strong>a minimum of 10 games</strong> to see the results.</li>
+<li>The more you play, the more accurate your results will be. Try to stick and switch in equal amounts.</li>
+</ul>
+
+<p>Although the original problem involved cars and goats, I've switched it to kittens and turnips. I'm presuming you would rather win kittens. If you don't like kittens or are allergic then I'm very sorry.</p>
+
+<p>You're looking to win more when switching: the ideal results would be a score of 66% when switching and 33% when sticking.</p>
+</div>
 </div>
 </article>
-<article class="thegame">
+<article class="thegame" id="kt">
 <div id="scrolling">
 <h3>Kitten <span>or</span> Turnip</h3>
 <div class="playtitle">(Play The Game)</div>
@@ -88,7 +119,7 @@
     </article>
     <footer class="colour">
     <div>
-    <p>Thank you for visiting</p>
+    <p>Thank you for visiting. Kitten or Turnip was created by Carrie Dean from Lumibox.co.uk. The purpose of this website was a task I set myself to learn JavaScript and may be revised at a later date.</p>
     </div>
     </footer>
     <div id="stickyscore">

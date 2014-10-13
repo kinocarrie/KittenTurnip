@@ -4,14 +4,23 @@ html, body {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 
-p {
+p, blockquote, ul {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   line-height: 150%;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .colour p {
   font-weight: 100;
+}
+
+a {
+  color: #73C242;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #E21B5A;
 }
 
 .doors {
@@ -109,7 +118,7 @@ font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   z-index: 100;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.1);
 }
 
 #stickyscore h5 {
@@ -155,7 +164,7 @@ font-weight: 700;
 
 .stickybar.switchbar {
   left: 0;
-  box-shadow: inset -2px 0 0 #E21B5A;
+  box-shadow: inset -2px 0 0 rgba(0,0,0,0.2);
 }
 
 .stickyscoring.switchs:after {
@@ -168,12 +177,12 @@ font-weight: 700;
   right: 50%;
   font-weight: 700;
   font-size: 12px;
-  color: #E21B5A;
+  color: #333;
 }
 
 .stickybar.stickbar {
   right: 0;
-  box-shadow: inset 2px 0 0 #E21B5A;
+  box-shadow: inset 2px 0 0 rgba(0,0,0,0.2);
 }
 
 .stickybar>div {
@@ -185,6 +194,7 @@ font-weight: 700;
 .stickybar.stickbar>div {
   transition: all 1s;
   float: right;
+    background-color: #73C242;
 }
 
 .stickybar.switchbar>div {
@@ -196,8 +206,15 @@ font-weight: 700;
   color: #E21B5A;
 }
 
+.stickyscoring.sticks span {
+  color: #73C242;
+}
+
 #stick {
   right: 20px;
+  background-color: #73C242;
+  border-bottom: 5px solid #3E751B;
+  text-shadow: 0 -1px 0 #3E751B;
 }
 
 #switch {
@@ -208,7 +225,7 @@ font-weight: 700;
   float: left;
   width: 50%;
   box-sizing: border-box;
-  border-right: 2px solid #E21B5A;
+  border-right: 2px solid #f0f0f0;
   padding-right: 40px;
   height: 220px;
 }
@@ -222,7 +239,7 @@ font-weight: 700;
   line-height: 25px;
   right: 426px;
   background-color: #fff;
-  color: #E21B5A;
+  color: #333;
   font-weight: 700;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
@@ -232,7 +249,7 @@ font-weight: 700;
   width: 50%;
   text-align:  right;
   box-sizing: border-box;
-  border-left: 2px solid #E21B5A;
+  border-left: 2px solid #f0f0f0;
   padding-left: 40px;
   height: 220px;
 }
@@ -249,6 +266,10 @@ font-weight: 700;
   margin-bottom: 10px;
   margin-top: 0;
   color: #E21B5A;
+}
+
+#score #stickscore h4 {
+  color: #73C242;
 }
 
 .scorebar {
@@ -275,6 +296,7 @@ font-weight: 700;
 
 #stickscore .scorebar>div {
   float:right;
+  background-color: #73C242;
 }
 
 .scoring p {
@@ -451,6 +473,10 @@ padding-bottom: 20px;
   background-color: #C9144E;
 }
 
+.selected.stickdoor {
+  box-shadow: 0 0 0 10px #73C242;
+}
+
 .selected i {
   opacity: 0.8;
 }
@@ -510,18 +536,19 @@ h2 {
 }
 
 article, footer {
-  padding: 80px 20px;
+  padding: 80px 20px 120px 20px;
   box-sizing: border-box;
   moz-box-sizing: border-box;
   min-height: 100%;
 }
 
-footer {
-  min-height: 200%;
-}
-
 article>div, footer>div {
   width: 900px;
+  margin: 0 auto;
+}
+
+article .textcontent {
+  width: 700px;
   margin: 0 auto;
 }
 
@@ -576,9 +603,58 @@ article h3 {
   color: #fff;
 }
 
+.howto ul {
+  list-style: decimal inside;
+  margin: 40px -100px;
+  font-size: 1.25em;
+  padding: 40px;
+  border: 6px solid rgba(0,0,0,0.2);
+}
+
+.howto ul li {
+  padding: 10px 0;
+  font-weight: 100;
+}
+
 .thegame {
   background-color: #fff;
   color: #333333;
+}
+
+.monty blockquote {
+  font-size: 1.25em;
+  padding: 40px;
+  border: 6px solid #f0f0f0;
+  margin: 40px -100px;
+}
+
+.colour blockquote {
+  font-size: 1.25em;
+  margin: 40px -100px;
+}
+
+.highlight {
+  font-size: 2em;
+  /*background-color: #E21B5A;
+  color: #fff;*/
+  text-transform: uppercase;
+  color: #E21B5A;
+/*  padding: 50px 20px;*/
+  text-align: center;
+  line-height: 100%;
+  
+}
+
+.highlight.hone {
+  float: right;
+  margin: 40px -100px 40px 40px;
+  width: 300px;
+}
+
+.highlight.htwo {
+  float: left;
+  margin: 40px 40px 40px -100px;
+  width: 360px;
 }
 
 footer {
