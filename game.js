@@ -1,4 +1,4 @@
-function play() {
+$(function() {
 
 $("#buttons, #replay, #score>div, #switchscore .scorebar, #stickscore .scorebar, #stickyscore").hide();
 $(".doorholder").addClass("begin");
@@ -21,21 +21,21 @@ var doors = [{getID: "doorOne",
 }];
 
 var switchScore = 0;
-var switchLost = 0;
 var stickScore = 0;
-var stickLost = 0;
 var gameTotal = 0;
+var switchTotal = 0;
+var stickTotal = 0;
 var kittenSelector = Math.random();
 var turnipSelector = Math.random();
 
 function wordPlural(i, j, k) {
-            if (i == 1) {
-                return (j)    
+            if (i === 1) {
+                return j;    
                 }
             else {
-                return (k)  
+                return k;  
             }
-        };//end wordPlural
+        }//end wordPlural
 
 function accessDoors(a) {
     for(var i=0; i<doors.length; i++) {
@@ -51,7 +51,7 @@ function prizeReset() {
     }
     kittenSelector = Math.random();
     turnipSelector = Math.random();
-    }; //end prizeReset
+    } //end prizeReset
 
 function prizeSelector() {
 
@@ -109,13 +109,32 @@ function changeSelection() {
     $("#" + newSelection).addClass("selected complete");
 }//end changeSelection
 
+function winLoseMessage(i, j) {
+    $("#buttons").delay(300).fadeOut();
+    if (i === "won") {
+        $("#message").html("<p><strong>You " + j + " and won!</strong> Congratulations on finding the kitten.</p>");
+    }
+    else {
+        $("#message").html("<p><strong>You " + j + " and lost!</strong> Oh well, better luck next time.</p>");
+    }
+    $("#replay").fadeIn();
+    $(".selected").addClass("complete");
+    setTimeout(function() {
+        revealAllDoors();
+    }, 100);
+}// end winLoseMessage
+
+function findOtherTurnip(a, b, c) {
+                for(var i=0; i<doors.length; i++) {
+                    if (doors[i].prize === "turnip" && doors[i].turnipReveal === false) {
+                        return doors[i].getID;
+                    }
+                } //end for
+            } //end otherTurnip
+
 function appendScore() {
     gameTotal++;
-    var switchTotal = switchScore + switchLost;
-    var stickTotal = stickScore + stickLost;
-    // var overallStickWin = stickScore + switchLost;
-    var overallSwitchWin = switchScore + stickLost;
-    var switchTotalPercent = (switchScore + stickLost) / gameTotal * 100;
+    var switchTotalPercent = (switchTotal) / gameTotal * 100;
     var stickWinPercent = stickScore / stickTotal * 100;
     var switchWinPercent = switchScore / switchTotal * 100;
 
@@ -179,7 +198,6 @@ function beginGame() {
         var doorSelection = $(this).attr("id");
         var doorSelectionReadable = returnDoors("getID", doorSelection, "readable");
         var currentPrize = returnDoors("getID", doorSelection, "prize");
-        var kittenDoor = returnDoors("prize", "kitten", "getID");
         var revealingTurnip = returnDoors("turnipReveal", true, "getID");
         editDoor("getID", doorSelection, "switchable", false);
 
@@ -197,13 +215,6 @@ function beginGame() {
             editDoor("getID", revealingTurnip, "switchable", false);
         }
         else if (doorSelection === revealingTurnip) {
-            function findOtherTurnip(a, b, c) {
-                for(var i=0; i<doors.length; i++) {
-                    if (doors[i].prize === "turnip" && doors[i].turnipReveal === false) {
-                        return doors[i].getID;
-                    }
-                } //end for
-            } //end otherTurnip
             var otherTurnip = findOtherTurnip();
             selectedMessage(otherTurnip);
             editDoor("getID", otherTurnip, "switchable", false);
@@ -218,20 +229,15 @@ $("#buttons > button").click(function() {
 
     var buttonClicked = $(this).attr("id");
 
-function winLoseMessage(i, j) {
-    $("#buttons").delay(300).fadeOut('fast');
-    if (i === "won") {
-        $("#message").html("<p><strong>You " + j + " and won!</strong> Congratulations on finding the kitten.</p>");
-    }
-    else {
-        $("#message").html("<p><strong>You " + j + " and lost!</strong> Oh well, better luck next time.</p>");
-    }
-    $("#replay").fadeIn();
-    $(".selected").addClass("complete");
-    setTimeout(function() {
-        revealAllDoors();
-    }, 300);
-}// end winLoseMessage
+if (buttonClicked === "stick") {
+    stickTotal++;
+    console.log(stickTotal);
+}
+else {
+    switchTotal++;
+    console.log(switchTotal);
+}
+
 
 if (buttonClicked === "stick" && currentPrize === "kitten") {
     stickScore++;
@@ -239,12 +245,12 @@ if (buttonClicked === "stick" && currentPrize === "kitten") {
     $(".selected").addClass("stickdoor");
 }
 else if (buttonClicked === "stick" && currentPrize === "turnip") {
-    stickLost++;
+    // stickLost++;
     winLoseMessage("lost", "stuck");
     $(".selected").addClass("stickdoor");
 }
 else if (buttonClicked === "switch" && currentPrize === "kitten") {
-    switchLost++;
+    // switchLost++;
     changeSelection();
     winLoseMessage("lost", "switched");
 }
@@ -265,17 +271,15 @@ beginGame();
 
 $("#replay > button").click(function() {
      $("#buttons > button").on("click");
-    // appendScore();
-    $(".doors, #message").delay(100).fadeOut(300).fadeIn(600);
-    setTimeout(function() {
+    $(".doors, #message").delay(100).fadeOut(300, function() {
         $(".doors").removeClass("kitten turnip selected complete stickdoor");
         $(".doorholder").addClass("begin");
         $("#message").html("<p class='arrow'>Pick another door to play again!</p>");
-    }, 400);
+    }).fadeIn(600);
     $("#replay").fadeOut(400);
     prizeReset();
     prizeSelector();
     $(".doors").on("click", beginGame());
 });//end replay click
 
-}; // end play.
+ });//end jquery
