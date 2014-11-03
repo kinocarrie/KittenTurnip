@@ -134,7 +134,8 @@ function findOtherTurnip(a, b, c) {
 
 function appendScore() {
     gameTotal++;
-    var switchTotalPercent = (switchTotal) / gameTotal * 100;
+    var stickLost = stickTotal - stickScore;
+    var switchTotalPercent = (switchScore + stickLost) / gameTotal * 100;
     var stickWinPercent = stickScore / stickTotal * 100;
     var switchWinPercent = switchScore / switchTotal * 100;
 
@@ -147,6 +148,9 @@ function appendScore() {
         }
         else if (switchTotalPercent < 60) {
             return "<strong>Keep on playing</strong>, you've had some bad luck, but the more you play the better the results will be.";
+        }
+        else if (switchTotalPercent >= 60 && stickWinPercent >= 50) {
+            return "These are some good scores, <strong>you've been very lucky</strong>, especially when sticking. The more you play, the better your results should be: try sticking more.";
         }
         else {
             return "<strong>These are some pretty good results!</strong> You can keep playing if you want, but I hope you can see how your chances are improved by switching doors instead of sticking with your first choice.";
@@ -231,11 +235,9 @@ $("#buttons > button").click(function() {
 
 if (buttonClicked === "stick") {
     stickTotal++;
-    console.log(stickTotal);
 }
 else {
     switchTotal++;
-    console.log(switchTotal);
 }
 
 
@@ -245,12 +247,10 @@ if (buttonClicked === "stick" && currentPrize === "kitten") {
     $(".selected").addClass("stickdoor");
 }
 else if (buttonClicked === "stick" && currentPrize === "turnip") {
-    // stickLost++;
     winLoseMessage("lost", "stuck");
     $(".selected").addClass("stickdoor");
 }
 else if (buttonClicked === "switch" && currentPrize === "kitten") {
-    // switchLost++;
     changeSelection();
     winLoseMessage("lost", "switched");
 }
