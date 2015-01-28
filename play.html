@@ -40,7 +40,7 @@
 
 <p>What you need to do to have a better chance of winning is simple: <strong>switch doors</strong>. If you stick with your first choice you will only have a 1 in 3 chance of winning that car, the same as you did at the beginning. Odds are it is more likely that the door you picked hid a goat: a 2 in 3 probability. As the other goat has been taken out of the equation there is a <strong>2 in 3 chance the car is behind the other door.</strong></p>
 
-<blockquote class="clearfix"><strong>Still not convinced?</strong> You're not alone. That's why I created a simulation of this game. You can <a href="#kt">play it and see for yourself</a> or <a href="#">read more about The Monty Hall Problem</a>.</blockquote>
+<blockquote class="clearfix"><strong>Still not convinced?</strong> You're not alone. That's why I created a simulation of this game. You can <a href="#play">play it and see for yourself</a> or <a href="http://en.wikipedia.org/wiki/Monty_Hall_problem">read more about The Monty Hall Problem</a>.</blockquote>
 </div>
 </div>
 </article>
@@ -65,7 +65,7 @@
 </div>
 </div>
 </article>
-<article class="thegame" id="kt">
+<article class="thegame" id="play">
 <div id="scrolling">
 <h3>Kitten <span>or</span> Turnip</h3>
 <div class="playtitle">(Play The Game)</div>
@@ -93,7 +93,7 @@
 <div id="message"><p class="arrow">Select a door to begin the game.</p></div>
 </div>
 <div id="score" class="scoring">
-    <p class="warning">You Need to play <strong>10 games</strong> before seeing a score.</p>
+    <p class="warning">You Need to play <strong>10 games</strong> to see your score.</p>
         <div id="switchscore">
         <h4>Switching</h4>
         <div class="scoredetails"></div>
@@ -137,19 +137,35 @@
 <script>
 $(document).ready(function(){
 $(window).scroll(function(){
-var windowPos = $(window).scrollTop();
+var windowPos = $(window).scrollTop() + 80;
 var divPos = $(".thegame").offset().top;
 var divHeight = $(".thegame").height();
 if (windowPos >= divPos && windowPos <= (divPos + divHeight)) {
     $("#stickyscore.active").fadeIn("slow");
 }
-else if (windowPos >= divPos && windowPos >= (divPos + divHeight)){
+else if (windowPos >= divPos && windowPos >= divPos + divHeight) {
     $("#stickyscore.active").fadeOut("fast");
 }
 else {
     $("#stickyscore.active").fadeOut("fast");
 }//end ifelse
 });//end scroll
+
+$('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+        || location.hostname == this.hostname) {
+
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+           if (target.length) {
+             $('html,body').animate({
+                 scrollTop: target.offset().top
+            }, 1000);
+            return false;
+        }
+    }
+});
+
 });//end ready
 </script>
 

@@ -158,7 +158,7 @@ function appendScore() {
     }//end goodBadResults
 
     if (gameTotal < 10) {
-        $("#score .warning").html("<p>You've only played <strong>" + gameTotal + " " + wordPlural(gameTotal, "time", "times") + "</strong>. You must play at least <strong>10 times</strong>.</p>");
+        $("#score .warning").html("You've only played <strong>" + gameTotal + " " + wordPlural(gameTotal, "time", "times") + "</strong>. You must play at least <strong>10 times</strong> to see your score.");
         $("#stickyscore").fadeIn().addClass("active");
         $("#stickyscore .stickyplay").html("<p>You've played " + gameTotal + " " + wordPlural(gameTotal, "time", "times") + "</p>");
     } 

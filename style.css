@@ -407,6 +407,7 @@ padding-bottom: 20px;
 
 .warning {
   text-align: center;
+  font-size: 1.25em;
 }
 
 #stickscore>div>p:first-of-type, #switchscore>div>p:first-of-type {
@@ -498,6 +499,7 @@ header {
   top: 42%;
   text-align: center;
   width: 100%;
+  min-width: 600px
 }
 
 h1 {
